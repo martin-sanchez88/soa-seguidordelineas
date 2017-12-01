@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lista_bebidas">
+    <item>"Coca cola"</item>
+        <item>Sprite</item>
+        <item>Cerveza</item>
+        <item>Espumante</item>
+        <item>Fernet</item>
+    </string-array>
+    <string-array name="lista_estacion">
+    <item>Mesa1</item>
+    <item>Mesa2</item>
+    <item>Mesa3</item>
+    <item>Mesa4</item>
+    <item>Mesa5</item>
+    </string-array>
+
+</resources>

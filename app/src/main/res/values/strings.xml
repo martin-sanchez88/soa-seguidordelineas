@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MoeBot</string>
+    <string name="Img_moe">Imagen_moe</string>
+    <string name="TxComienzo">Comienzo</string>
+    <string name="Error_cant0">Error cantidad 0</string>
+    <string name="Default1">1</string>
+    <string name="Lista_vacia">No se han registrado pedidos</string>
+    <string name="Pedido_cargado">El pedido se ha cargado</string>
+    <string name="ListaLimpia">Se ha limpiado la lista</string>
+</resources>
