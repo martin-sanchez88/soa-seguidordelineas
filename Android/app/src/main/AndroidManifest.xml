@@ -28,7 +28,6 @@
         <activity android:name=".Menu" />
         <activity android:name=".ListaPedidos" />
         <activity android:name=".Acerca" />
-        <!-- - Aca toqué para ver si soluciono lo de los dispositivos cornudos -->
         <activity android:name=".ListaDispositivos"
             android:label="MoeBot Bluetooth"
             >
