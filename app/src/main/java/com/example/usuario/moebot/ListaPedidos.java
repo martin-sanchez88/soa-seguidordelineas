@@ -66,7 +66,7 @@ public class ListaPedidos extends AppCompatActivity implements SensorEventListen
             //Obtengo la lista de pedidos de Activity Selección
             Parray = contenedor.getParcelable("Pedidos");
 
-            //Obtengo el parametro, aplicando un Bundle, que me indica la Mac Adress del HC05
+            //Obtengo el parametro, aplicando un Bundle, que me indica la Mac Adress del HC06
             direccionplaca= contenedor.getString("Direccion_Bluethoot");
 
             AdapterPedido adapter = new AdapterPedido(this,R.layout.listview_item_row,Parray);
@@ -193,7 +193,7 @@ public class ListaPedidos extends AppCompatActivity implements SensorEventListen
     // Metodo que escucha el cambio de los sensores
     @Override
     public void onSensorChanged(SensorEvent event) {
-        //float[] values = event.values;
+      
 
         synchronized (this) {
 
@@ -233,8 +233,7 @@ public class ListaPedidos extends AppCompatActivity implements SensorEventListen
     }
 
 
-    //Idea, realizar toda la conexión en el Thread (incluyendo la creación del socket
-
+    //Idea, realizar toda la conexión en el Thread (incluyendo la creación del socket)
 
     private class ConnectedThread extends Thread
     {
@@ -318,10 +317,6 @@ public class ListaPedidos extends AppCompatActivity implements SensorEventListen
 
                 MostrarToast("Secuencia de mesas enviadas");
             }
-
-            //Parray.clear(); //Limpio el array que se va a descargar ERRRORRR
-            //finish(); Sacando esto la App queda más cómoda.
-
         }
     };
 
