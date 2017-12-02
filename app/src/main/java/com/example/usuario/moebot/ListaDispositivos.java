@@ -137,7 +137,7 @@ public class ListaDispositivos extends AppCompatActivity {
 
                     startActivity(i);
 
-                }  //si se detrecto un desaemparejamiento
+                }  //si se detecto un desemparejamiento
                 else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED) {
                     showToast("No emparejado");
                 }
