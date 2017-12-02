@@ -60,7 +60,6 @@ int contadorDeteccionesIzquierdas = 0;
   1 Andand Rueda Derecha
   2 Andando Rueda Izquierda
   3 Andando Ambas Ruedas
-  4 Andando Lento
 */
 int contadorRecepcion = 0; //Contador de recepción de paradas en la comunicación BT/Serial
 char c; //Caracter recibido por BT
@@ -146,10 +145,8 @@ void loop() {
   del pulso ultrasónico y cuando el sensor recibe el rebote, es decir: desde que el pin 4 empieza a recibir el rebote, HIGH, hasta que
   deja de hacerlo, LOW, la longitud del pulso entrante*/
     distancia = int(0.017 * tiempo); /*fórmula para calcular la distancia obteniendo un valor entero*/
-    /*Monitorización en centímetros por el monitor serial*/
-    //Serial.print(distancia);
-    // Serial.print("\n");
-    if (distancia < 10 && distancia != 0 ) { //Y la distancia es menos de 10 cm (Y distinta de cero porque a veces el sensor maldito se cuelga, hace fruta y da cero sin razón conocida)
+ 
+    if (distancia < 10 && distancia != 0 ) { //Y la distancia es menos de 10 cm (Y distinta de cero porque a veces el sensor se cuelga y da cero sin razón conocida)
       obstaculizado = true; //Obstaculizado -----------------------------
       //Frenar Ruedas
       analogWrite(ENA, 0);
@@ -181,19 +178,16 @@ void loop() {
   /*----------------Código Seguidor con Estaciones-------------------*/
   /*----------------Código Seguidor con Estaciones-------------------*/
   if (!obstaculizado) { //Si no está obstaculizado
-    //noTone(speakerPin); //Speaker en silencio (Aún así no se por qué hace un pequeño sonido)
+   
     if (!abasteciendo) { //Si no está en estación de abastecimiento
       if (esperando == 0) { //Si no está esperando
         //Funcionamiento de Seguidor de Líneas
         Valora = digitalRead(sensora); //Leer y almacenar el valor del sensor Derecho
         Valorb = digitalRead(sensorb); //Leer y almacenar el valor del sensor Central
         Valorc = digitalRead(sensorc); //Leer y almacenar el valor del sensor Izquierdo
-        //delay(100);//Esperar 100 ms, probar sacándolo
+       
         delay(20);//Esperar 20 ms
-        /*Serial.print(Valora);
-          Serial.print(Valorb);
-          Serial.print(Valorc);
-          Serial.print("\n");*/
+
         if (Valora == 1 && Valorb == 0 && Valorc == 1 && direccion != 3) { //B-N-B, Ambas Ruedas andando
           analogWrite(ENA, 190);
           analogWrite(ENB, 190);
@@ -203,7 +197,7 @@ void loop() {
           digitalWrite (IN4, HIGH); //Anda Rueda Izquierda
           digitalWrite (IN3, LOW);
           direccion = 3;
-          //Serial.write('A');
+       
           contadorDeteccionesDerechas = 0; //Cuando se detecta ir para adelante, se resetean los cambios de dirección, para ignorar las lecturas erráticas.
           contadorDeteccionesIzquierdas = 0;
         }
@@ -218,7 +212,7 @@ void loop() {
             digitalWrite (IN4, HIGH);
             digitalWrite (IN3, LOW);
             direccion = 1;
-           // Serial.write('I');
+  
           }
         }
         if ((Valora == 0 && Valorb == 0 && Valorc == 1 || Valora == 0 && Valorb == 1 && Valorc == 1) && direccion != 2) { //N-N-B,NBB Gira para Izquierda
@@ -232,7 +226,7 @@ void loop() {
             digitalWrite (IN4, HIGH);
             digitalWrite (IN3, LOW);
             direccion = 2;
-            //Serial.write('D');
+        
           }
 
         }
@@ -291,7 +285,7 @@ void loop() {
       }
       if (contadorRecepcion == (cantidadParadas - 1)) { //Si ya recibió todas las paradas
         abasteciendo = false; //Deja el modo de abastecimiento
-        //Serial.write('R');//Aviso de Recepción y salida a Repartir
+        
       }
     }
   }
