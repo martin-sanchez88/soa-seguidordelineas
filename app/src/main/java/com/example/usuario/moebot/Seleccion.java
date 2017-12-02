@@ -16,7 +16,7 @@ import android.widget.Toast;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 
-/* Imports de Senrores*/
+/* Imports de Sensores*/
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -82,7 +82,7 @@ public class Seleccion extends AppCompatActivity implements SensorEventListener{
 
         if ( contenedor != null)
         {
-            //Obtengo el parametro, aplicando un Bundle, que me indica la Mac Adress del HC05
+            //Obtengo el parametro, aplicando un Bundle, que me indica la Mac Adress del HC06
             direccionplaca = contenedor.getString("Direccion_Bluethoot");
         }
 
@@ -184,7 +184,6 @@ public class Seleccion extends AppCompatActivity implements SensorEventListener{
     protected void onStop()
     {
         Parar_Sensores();
-       // DesregistrarSensor();
         super.onStop();
     }
 
@@ -218,7 +217,7 @@ public class Seleccion extends AppCompatActivity implements SensorEventListener{
                     // Si detecta 0 lo represento
                     if (event.values[0] == 0) {
                         showToast("Muy Cerca");
-                        //mConnectedThread.write("P");
+                      
                     }
 
                     break;
@@ -227,7 +226,7 @@ public class Seleccion extends AppCompatActivity implements SensorEventListener{
 
                     if (event.values[0] == 0){
                         showToast("Poca Luz");
-                        // mConnectedThread.write("L");
+                       
                     }
 
                     break;
@@ -245,11 +244,7 @@ public class Seleccion extends AppCompatActivity implements SensorEventListener{
     }
 
 
-/*    private void DesregistrarSensor()
-    {
-        sensor.unregisterListener(this);
 
-    }*/
     // Metodo para iniciar el acceso a los sensores
     protected void Ini_Sensores() {
         sensor.registerListener(this, sensor.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
