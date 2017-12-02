@@ -41,33 +41,33 @@ public class OpcionesBluetooth extends AppCompatActivity {
         btnEmparejar = (Button) findViewById(R.id.BtnEmparejar);
         btnBuscar = (Button) findViewById(R.id.BtnBuscar);
 
-        //Se crea un adaptador para podermanejar el bluethoot del celular
+        //Se crea un adaptador para podermanejar el bluetooth del celular
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        //Se Crea la ventana de dialogo que indica que se esta buscando dispositivos bluethoot
+        //Se Crea la ventana de dialogo que indica que se esta buscando dispositivos bluetooth
         mProgressDlg = new ProgressDialog(this);
         mProgressDlg.setMessage("Buscando dispositivos...");
         mProgressDlg.setCancelable(false);
 
-        //se asocia un listener al boton cancelar para la ventana de dialogo ue busca los dispositivos bluethoot
+        //se asocia un listener al boton cancelar para la ventana de dialogo ue busca los dispositivos bluetooth
         mProgressDlg.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancelar", btnCancelarDialogListener);
 
-        //se determina si existe bluethoot en el celular
+        //se determina si existe bluetooth en el celular
         if (mBluetoothAdapter == null)
         {
-            //si el celular no soporta bluethoot
+            //si el celular no soporta bluetooth
             showUnsupported();
         }
         else
         {
-            //si el celular soporta bluethoot, se definen los listener para los botones de la activity
+            //si el celular soporta bluetooth, se definen los listener para los botones de la activity
             btnEmparejar.setOnClickListener(btnEmparejarListener);
 
             btnBuscar.setOnClickListener(btnBuscarListener);
 
             btnActivar.setOnClickListener(btnActivarListener);
 
-            //se determina si esta activado el bluethoot
+            //se determina si esta activado el bluetooth
             if (mBluetoothAdapter.isEnabled())
             {
                 //se informa si esta habilitado
@@ -84,11 +84,11 @@ public class OpcionesBluetooth extends AppCompatActivity {
         IntentFilter filter = new IntentFilter();
 
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED); //Cambia el estado del Bluethoot (Activado /Desactivado)
-        filter.addAction(BluetoothDevice.ACTION_FOUND); //Se encuentra un dispositivo bluethoot al realizar una busqueda
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED); //Cuando se comienza una busqueda de bluethoot
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED); //cuando la busqueda de bluethoot finaliza
+        filter.addAction(BluetoothDevice.ACTION_FOUND); //Se encuentra un dispositivo bluetooth al realizar una busqueda
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED); //Cuando se comienza una busqueda de bluetooth
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED); //cuando la busqueda de bluetooth finaliza
 
-        //se define (registra) el handler que captura los broadcast anterirmente mencionados.
+        //se define (registra) el handler que captura los broadcast anteriormente mencionados.
         registerReceiver(mReceiver, filter);
     }
 
@@ -107,8 +107,8 @@ public class OpcionesBluetooth extends AppCompatActivity {
     }
 
     @Override
-    //Cuando se detruye la Acivity se quita el registro de los brodcast. Apartir de este momento no se
-    //recibe mas broadcast del SO. del bluethoot
+    //Cuando se detruye la Activity se quita el registro de los broadcast. Apartir de este momento no se
+    //recibe mas broadcast del SO. del bluetooth
     public void onDestroy() {
         unregisterReceiver(mReceiver);
 
@@ -146,16 +146,16 @@ public class OpcionesBluetooth extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    //Handler que captura los brodacast que emite el SO al ocurrir los eventos del bluetooth
+    //Handler que captura los broadcast que emite el SO al ocurrir los eventos del bluetooth
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
 
-            //Atraves del Intent obtengo el evento de Bluethoot que informo el broadcast del SO
+            //Atraves del Intent obtengo el evento de Bluetooth que informo el broadcast del SO
             String action = intent.getAction();
-            //Si cambio de estado el Bluethoot(Activado/desactivado)
+            //Si cambio de estado el Bluetooth(Activado/desactivado)
             if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action))
             {
-                //Obtengo el parametro, aplicando un Bundle, que me indica el estado del Bluethoot
+                //Obtengo el parametro, aplicando un Bundle, que me indica el estado del Bluetooth
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
 
                 //Si esta activado
@@ -166,7 +166,7 @@ public class OpcionesBluetooth extends AppCompatActivity {
                     showEnabled();
                 }
             }
-            //Si se inicio la busqueda de dispositivos bluethoot
+            //Si se inicio la busqueda de dispositivos bluetooth
             else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action))
             {
                 //Creo la lista donde voy a mostrar los dispositivos encontrados
@@ -174,7 +174,7 @@ public class OpcionesBluetooth extends AppCompatActivity {
                 //muestro el cuadro de dialogo de busqueda
                 mProgressDlg.show();
             }
-            //Si finalizo la busqueda de dispositivos bluethoot
+            //Si finalizo la busqueda de dispositivos bluetooth
             else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action))
             {
                 //se cierra el cuadro de dialogo de busqueda
@@ -187,11 +187,10 @@ public class OpcionesBluetooth extends AppCompatActivity {
 
                 startActivity(newIntent);
             }
-            //si se encontro un dispositivo bluethoot
+            //si se encontro un dispositivo bluetooth
             else if (BluetoothDevice.ACTION_FOUND.equals(action))
             {
-                Toast.makeText(getApplicationContext(), "averaver", Toast.LENGTH_SHORT).show();
-                //Se lo agregan sus datos a una lista de dispositivos encontrados
+               //Se lo agregan sus datos a una lista de dispositivos encontrados
                 BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
                 mDeviceList.add(device);
