@@ -4,7 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-/* Imports de Senrores*/
+/* Imports de Sensores*/
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -204,7 +204,7 @@ public class ListaPedidos extends AppCompatActivity implements SensorEventListen
 
                     // Si detecta 0 lo represento
                     if (event.values[0] < 5) {
-                        //MostrarToast("Sensor de proximidad en 0");
+                     
                         mConnectedThread.write("P");
                     }
 
@@ -213,7 +213,7 @@ public class ListaPedidos extends AppCompatActivity implements SensorEventListen
                 case Sensor.TYPE_LIGHT:
 
                     if (event.values[0] < 10){
-                        //MostrarToast("Sensor de Luz en 0");
+                        
                         mConnectedThread.write("L");
                     }
 
@@ -222,7 +222,7 @@ public class ListaPedidos extends AppCompatActivity implements SensorEventListen
         }
     }
 
-    //Metodo que crea el socket bluethoot
+    //Metodo que crea el socket bluetooth
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
 
         return  device.createRfcommSocketToServiceRecord(BTMODULEUUID);
