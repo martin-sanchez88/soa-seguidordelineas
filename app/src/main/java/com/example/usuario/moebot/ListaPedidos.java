@@ -87,7 +87,6 @@ public class ListaPedidos extends AppCompatActivity implements SensorEventListen
     //socketBluethoot
     public void onResume() {
         super.onResume();
-        RegistrarSensor();
         Ini_Sensores();
         //Obtengo el parametro, aplicando un Bundle, que me indica la Mac Adress del HC06
         Intent intent=getIntent();
@@ -175,19 +174,7 @@ public class ListaPedidos extends AppCompatActivity implements SensorEventListen
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-
-    //Se registran los sensores que vamos a utiliar
-    private void RegistrarSensor() {
-        boolean done;
-        done = sensor.registerListener(ListaPedidos.this, sensor.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-
-        if (!done) {
-            MostrarToast("Sensor no Soportado");
-
-        }
-
-    }
-
+    
     // Metodo para iniciar el acceso a los sensores
     protected void Ini_Sensores() {
         sensor.registerListener(this, sensor.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
